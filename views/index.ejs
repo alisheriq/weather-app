@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Weather App</title>
+    <title>Weather API</title>
     <link rel="stylesheet" type="text/css" href="/style.css" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css"/>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css" integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ==" crossorigin="" />
@@ -10,7 +10,7 @@
   </head>
   <body>
     <div class="container">
-      <h1>Weather App using NodeJS</h1>
+      <h1>Weather API Application</h1>
       <form action="/weather" method="get">
         <input type="text" name="city" placeholder="Enter city name" />
         <button type="submit">Get Weather</button>
@@ -83,6 +83,9 @@
           L.marker([<%=weather.coord.lat%>, <%=weather.coord.lon%>]).addTo(map);
       </script>
       <% } %>
+        <div class="footer">
+          <p>&copy; Alisher Kulbossynov SE-2214</p>
+        </div>
     </div>
   </body>
 </html>
