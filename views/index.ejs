@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Weather App</title>
+    <link rel="stylesheet" type="text/css" href="/style.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css" integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ==" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js" integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ==" crossorigin=""></script>
+    
+  </head>
+  <body>
+    <div class="container">
+      <h1>Weather App using NodeJS</h1>
+      <form action="/weather" method="get">
+        <input type="text" name="city" placeholder="Enter city name" />
+        <button type="submit">Get Weather</button>
+      </form>
+       <% if (error) { %>
+      <p class="error"><%= error %></p>
+      <% } else if (weather) { %>
+      <div class="card">
+        <p>
+          <i class="fas fa-map-marker-alt"></i>
+          <%=weather.name%>, <%=weather.sys.country%>, <%=weather.coord.lon%>, <%=weather.coord.lat%>
+        </p>
+        <img src="https://openweathermap.org/img/wn/<%=weather.weather[0].icon%>@2x.png" alt="Weather Icon" style="height:70px; width:70px;">
+        <p>
+          <i class="fas fa-tag"></i>
+          Description: <%=weather.weather[0].description%>
+        </p>
+        <p>
+          <i class="fas fa-temperature-high"></i>
+          Temperature: <%=weather.main.temp%>&deg;C
+        </p>
+        <p>
+          <i class="fas fa-street-view"></i>
+           Feels like: <%=weather.main.feels_like%>&deg;C
+        </p>
+        <p>
+          <i class="fas fa-water"></i>
+          Humitidy: <%=weather.main.humidity%>%
+        </p>
+        <p>
+          <i class="fas fa-caret-down"></i>
+          Pressure: <%=weather.main.pressure%>hPa
+        </p>
+        <p>
+          <i class="fas fa-wind"></i>
+          Wind Speed: <%=weather.wind.speed%>m/s
+        </p>
+        <% if (uvData) { %>
+          <p>
+            <i class="fas fa-sun"></i>
+            UV Index: <%= uvData.result.uv * 10 %>
+          </p>
+          <p>
+            <i class="fas fa-fire"></i>
+            Max UV: <%= uvData.result.uv_max * 10 %> 
+          </p>
+          <% } else { %>
+          <p>UV data not available.</p>
+        <% } %>
+        <% if (airquality) { %>
+          <p>
+            <i class="fas fa-smog"></i>
+            Air Pollution Index(US): <%= airquality.data.current.pollution.aqius %> (PM2)
+          </p>
+          <% } else { %>
+          <p>
+            Air Pollution data not available.
+          </p>
+        <% } %>
+      </div>
+      <div id="map"></div>
+      <script>
+          var map = L.map('map').setView([<%=weather.coord.lat%>, <%=weather.coord.lon%>], 10);
+  
+          L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 10,
+            minZoom: 1,
+            attribution: '© OpenStreetMap'
+          }).addTo(map);
+          L.marker([<%=weather.coord.lat%>, <%=weather.coord.lon%>]).addTo(map);
+      </script>
+      <% } %>
+    </div>
+  </body>
+</html>

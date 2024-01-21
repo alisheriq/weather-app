@@ -1,0 +1,102 @@
+body {
+  background-color: #222; /* Darker background for contrast */
+  font-family: sans-serif;
+  color: #fff; /* White text for readability */
+  margin: 0;
+  padding: 0;
+  text-align: center; /* Center all text content */
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
+  border-radius: 10px; /* Softer edges */
+}
+
+h1 {
+  font-size: 2rem;
+  font-weight: 300;
+  margin-bottom: 20px;
+}
+
+form {
+  margin-bottom: 20px;
+}
+
+input[type="text"] {
+  background-color: transparent; /* Transparent input for visual consistency */
+  border: 2px solid #fff; /* White border with more emphasis */
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 16px;
+  color: #fff;
+  margin-right: 10px;
+}
+
+button {
+  background-color: #ea6b2b;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.error {
+  color: #f00;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.card {
+  background-color: rgba(255, 255, 255, 0.2); /* Semi-transparent card */
+  padding: 20px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.card p {
+  margin-bottom: 5px;
+}
+
+.card i {
+  font-size: 18px;
+  margin-right: 5px;
+  color: #ea6b2b;
+}
+
+.card img {
+  display: block;
+  margin: 0 auto;
+  border-radius: 50%;
+}
+
+#map {
+  height: 300px;
+  border-radius: 10px; /* Rounded corners for the map */
+}
+
+@media only screen and (max-width: 768px) {
+  .container {
+    padding: 10px;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  input[type="text"] {
+    font-size: 14px;
+  }
+
+  button {
+    font-size: 14px;
+  }
+
+  .card p {
+    font-size: 14px;
+  }
+}
