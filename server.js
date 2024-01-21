@@ -19,18 +19,18 @@ app.get("/weather", async (req, res) => {
   const city = req.query.city;
   const apiKey = "a3616aba692f2fb6881ffc95992c16c8";
 
-  // Add your logic here to fetch weather data from the API
   const OpenWeatherAPIUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
   let airquality;
   let weather;
   let uvData;
   let error = null;
   try {
+    // OpenWeather API
     const response = await axios.get(OpenWeatherAPIUrl);
     weather = response.data;
+    // IQAir API
     const response2 = await axios.get('http://api.airvisual.com/v2/nearest_city?lat='+weather.coord.lat+'&lon='+weather.coord.lon+'&key=3ff54967-3ac4-4446-b5ad-4a0544bb195f')
     airquality = response2.data;
-    console.log(airquality.data.current.pollution);
 
     var myHeaders = new Headers();
     myHeaders.append("x-access-token", "openuv-f9a41qrlrnry8jm-io");
@@ -42,6 +42,7 @@ app.get("/weather", async (req, res) => {
       redirect: 'follow'
     };
     
+    //OpenUV API
     fetch("https://api.openuv.io/api/v1/uv?lat="+weather.coord.lat+"&lng="+weather.coord.lon+"&alt=100&dt=", requestOptions)
     .then(response => {
       return response.text();
@@ -59,11 +60,6 @@ app.get("/weather", async (req, res) => {
     error = "Error, Please try again";
     res.render("index", { weather, error, uvData, airquality });
   }
-
-  //OpenUV API
-  
-  
-  
 });
 
 // Start the server and listen on port 3000 or the value of the PORT environment variable
